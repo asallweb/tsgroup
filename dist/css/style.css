@@ -2699,6 +2699,9 @@ button.swiper-pagination-bullet {
 body.dark-theme.home-page {
   background: #312f38
 }
+body.dark-theme.home-page .intro__wrapper {
+  background-color: #534f5e
+}
 body.dark-theme .header._header-scroll {
   background: rgba(49,47,56,.85)!important;
   box-shadow: 0 4px 30px rgba(0,0,0,.3)!important
