@@ -3545,6 +3545,11 @@ button.swiper-pagination-bullet {
   backface-visibility: hidden;
   overflow: hidden
 }
+@media (min-width:47.99875em) {
+  body.dark-theme.home-page .intro__wrapper {
+    background: #534f5e
+  }
+}
 @media (max-width:991px) {
   .cooperation__title {
     font-size: 32px
