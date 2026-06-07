@@ -15,7 +15,7 @@
 body,
 html {
   height: 100%;
-  min-width: 375px
+  min-width: 350px
 }
 body {
   color: #261a4c;
@@ -103,14 +103,14 @@ body.home-page {
   min-width: 0
 }
 [class*=__container] {
-  max-width: 79.5rem;
+  max-width: 79rem;
   margin: 0 auto;
-  padding: 0 1rem
+  padding: 0 .75rem
 }
 [class*="--gc"] {
   display: grid;
   min-width: 0;
-  grid-template-columns: 1rem 1fr minmax(auto,77.5rem) 1fr 1rem
+  grid-template-columns: .75rem 1fr minmax(auto,77.5rem) 1fr .75rem
 }
 [class*="--gc"]>* {
   min-width: 0;
@@ -861,7 +861,7 @@ button.swiper-pagination-bullet {
   max-width: 1387px;
   padding: 48px 80px 30px 80px;
   z-index: 50;
-  transition: background-color .3s ease,padding .3s ease,box-shadow .3s ease,border-radius .3s ease,top .3s ease,max-width .3s ease
+  transition: background-color .3s ease,padding .3s ease,box-shadow .3s ease,border-radius .3s ease,max-width .3s ease
 }
 .header .header__container {
   padding: 0;
@@ -876,10 +876,16 @@ button.swiper-pagination-bullet {
   width: 100%;
   max-width: 1320px;
   padding: 15px 48px!important;
-  background: rgba(255,255,255,.85);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,.95);
   box-shadow: 0 4px 30px rgba(38,26,76,.08);
   border-radius: 0 0 27px 27px
+}
+@supports (backdrop-filter:blur(12px)) or (-webkit-backdrop-filter:blur(12px)) {
+  .header._header-scroll {
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px)
+  }
 }
 .header__body {
   display: flex;
@@ -2699,12 +2705,14 @@ button.swiper-pagination-bullet {
 body.dark-theme.home-page {
   background: #312f38
 }
-body.dark-theme.home-page .intro__wrapper {
-  background-color: #534f5e
-}
 body.dark-theme .header._header-scroll {
-  background: rgba(49,47,56,.85)!important;
+  background: rgba(49,47,56,.95)!important;
   box-shadow: 0 4px 30px rgba(0,0,0,.3)!important
+}
+@supports (backdrop-filter:blur(12px)) or (-webkit-backdrop-filter:blur(12px)) {
+  body.dark-theme .header._header-scroll {
+    background: rgba(49,47,56,.85)!important
+  }
 }
 body.dark-theme .header__logo img {
   -webkit-filter: brightness(0) invert(1);
@@ -3566,17 +3574,17 @@ button.swiper-pagination-bullet {
     font-size: 15px
   }
 }
-@media (max-width:47.99875em) {
+@media (max-width:61.99875em) {
   .menu__body {
     position: fixed;
-    width: 204px;
+    right: -264px;
+    width: 264px;
     height: 100%;
-    right: -204px;
     top: 0;
     overflow: auto;
     background-color: #5c35d0;
     border-radius: 20px 0 0 20px;
-    padding: 67px 13px 21px 21px;
+    padding: 90px 13px 21px 21px;
     transition: right .3s;
     z-index: 10
   }
@@ -3638,15 +3646,16 @@ button.swiper-pagination-bullet {
     left: 0;
     -webkit-transform: none;
     transform: none;
-    padding: 10px 16px!important;
+    padding: calc(10px + env(safe-area-inset-top)) 16px 10px 16px!important;
     border-radius: 0 0 20px 20px;
     top: 0
   }
   .menu-open .header._header-scroll {
-    backdrop-filter: none
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none
   }
   .header {
-    padding: 20px 16px 0 16px;
+    padding: calc(48px + env(safe-area-inset-top)) 45px 30px 45px;
     max-width: none;
     left: 0;
     -webkit-transform: none;
@@ -3721,6 +3730,25 @@ button.swiper-pagination-bullet {
   }
   .menu__link._active {
     background-color: #4d2eaa
+  }
+  .social {
+    flex-direction: column;
+    align-items: flex-start
+  }
+}
+@media (max-width:61.99875em)and (any-hover:none) {
+  .icon-menu {
+    cursor: default
+  }
+}
+@media (max-width:47.99875em) {
+  .menu__body {
+    padding: 67px 13px 21px 21px;
+    right: -204px;
+    width: 204px
+  }
+  .header {
+    padding: calc(20px + env(safe-area-inset-top)) 16px 0 16px
   }
   .footer {
     border-radius: 20px 20px 0 0;
@@ -3798,9 +3826,7 @@ button.swiper-pagination-bullet {
     font-size: 10px
   }
   .social {
-    flex-direction: column;
-    gap: 6px;
-    align-items: flex-start
+    gap: 6px
   }
   .social__link {
     width: 31px;
@@ -3808,9 +3834,6 @@ button.swiper-pagination-bullet {
   }
   .intro {
     padding-top: 15px
-  }
-  .intro__container {
-    padding: 0 clamp(16px,4.45vw,21px)
   }
   .intro__wrapper {
     background-color: rgba(0,0,0,0);
@@ -3841,14 +3864,13 @@ button.swiper-pagination-bullet {
     color: #fff;
     margin-top: 2.6%;
     margin-left: 5.5%;
-    margin-bottom: 34px
+    margin-bottom: 10%
   }
   .intro__text {
     font-size: clamp(12px,3.2vw,20px);
     line-height: clamp(15px,4vw,25px);
     color: #261a4c;
-    max-width: 82%;
-    margin-left: 1.2%
+    max-width: 82%
   }
   .intro__actions {
     position: absolute;
@@ -4018,7 +4040,9 @@ button.swiper-pagination-bullet {
     gap: 8px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 5px
+    padding-bottom: 5px;
+    margin-right: -16px;
+    padding-right: 16px
   }
   .news__tabs::-webkit-scrollbar {
     display: none
@@ -4241,6 +4265,8 @@ button.swiper-pagination-bullet {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 5px;
+    margin-right: -16px;
+    padding-right: 16px;
     order: 3
   }
   .news--page .tabs-news--page::-webkit-scrollbar {
@@ -4426,12 +4452,7 @@ button.swiper-pagination-bullet {
     background-color: #604c99
   }
 }
-@media (max-width:47.99875em)and (any-hover:none) {
-  .icon-menu {
-    cursor: default
-  }
-}
-@media (max-width:79.5em)and (min-width:47.99875em) {
+@media (max-width:79em)and (min-width:61.99875em) {
   .header._header-scroll {
     max-width: calc(100% - 90px);
     padding: 12px 45px!important
@@ -4461,6 +4482,8 @@ button.swiper-pagination-bullet {
   .menu__link {
     padding: 8px 12px
   }
+}
+@media (max-width:79em)and (min-width:47.99875em) {
   .footer {
     border-radius: 40px;
     padding: 50px 0 60px 0
@@ -4560,7 +4583,7 @@ button.swiper-pagination-bullet {
     gap: clamp(48px,7.08vw,90px)
   }
   .intro__title {
-    font-size: clamp(44px,5.03vw,64px)
+    font-size: clamp(36px,4vw,64px)
   }
   .intro__text {
     font-size: clamp(14px,1.57vw,20px);
